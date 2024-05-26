@@ -1,12 +1,8 @@
 import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import static org.junit.Assert.assertEquals;
 
 public class CheckoutPage extends BasePage {
 
@@ -15,214 +11,127 @@ public class CheckoutPage extends BasePage {
     public CheckoutPage(WebDriver driver) {
 
         super(driver);
-        wait = new WebDriverWait(driver, 10);
+        wait = new WebDriverWait(driver, 30);
     }
 
-    @FindBy(xpath = "//a[text()='Food']")
-    private WebElement foodMenu;
+    @FindBy(className = "product-image")
+    private WebElement productImage;
 
-    @FindBy(css = ".product-info button")
-    private WebElement addToCart;
-
-    //driver.findElement(By.id("city")).sendKeys("alabama");
-    @FindBy(id = "city")
-    private WebElement cityCart;
-
-    @FindBy(id = "postcode")
-    private WebElement postcode;
-
-    @FindBy(id = "region_id")
-    public WebElement cartRegion;
-
-    @FindBy(css = ".method-checkout-cart-methods-onepage-bottom button")
-    public WebElement proceedToCheckout;
-
-    @FindBy(id = "onepage-guest-register-button")
-    public WebElement selectGuest;
-
-    @FindBy(id = "billing:firstname")
-    public WebElement firstname;
-
-    @FindBy(id = "billing:lastname")
-    public WebElement lastname;
-    @FindBy(id = "billing:email")
-    private WebElement billingEmail;
-
-    @FindBy(id = "billing:street1")
-    private WebElement billingAddress;
-    @FindBy(id = "billing:city")
-    private WebElement billingCity;
-
-    @FindBy(id = "billing:region_id")
-    public WebElement billingRegion;
-
-    @FindBy(id = "billing:postcode")
-    private WebElement billingPostcode;
-
-    @FindBy(id = "billing:telephone")
-    private WebElement billingTelephone;
-
-    @FindBy(css = "#shipping-method-buttons-container button")
-    public WebElement shippingButton;
-
-    @FindBy(css = "#billing-buttons-container button")
-    public WebElement billingButton;
-
-    @FindBy(css = "#payment-buttons-container button")
-    public WebElement paymentButton;
-
-    @FindBy(css = ".btn-checkout")
-    public WebElement checkoutButton;
-
-    @FindBy(css = ".sub-title")
-    public WebElement subTitleElement;
-
-    @FindBy(id = "advice-required-entry-billing:firstname")
-    public WebElement requiredFirstName;
-
-    @FindBy(id = "advice-required-entry-billing:lastname")
-    public WebElement requiredLastName;
-
-    public void getFoodMenu() {
-        foodMenu.click();
+    public WebElement getProductImage() {
+        return productImage;
     }
 
-    public void clickAddToCart() {
-        addToCart.click();
+    @FindBy(linkText = "Awesome Granite Chips")
+    private WebElement addProductGraniteChipsToCartLink;
+
+    public void clickAddProductGraniteChipsToCartLink() {
+        addProductGraniteChipsToCartLink.click();
     }
 
-    public void setCityCart() {
-        cityCart.sendKeys("Alabama");
+    @FindBy(css = ".svg-inline--fa.fa-cart-plus.fa-w-18.fa-3x")
+    private WebElement addProductGraniteChipsToCartButton;
+
+    public void clickAddProductGraniteChipsToCartButton() {
+        addProductGraniteChipsToCartButton.click();
     }
 
-    public void setPostcode() {
-        postcode.sendKeys("33033");
+    @FindBy(css = ".svg-inline--fa.fa-shopping-cart.fa-w-18")
+    private WebElement cartButton;
+
+    public void clickCartButton() {
+        cartButton.click();
     }
 
-    public void setCartRegion() {
-        cartRegion.sendKeys("Alabama");
+    @FindBy(css = "sort-products-select")
+    private WebElement sortButton;
+
+    public void clickSortButton() {
+        sortButton.click();
     }
 
-    public void clickProceedToCheckout() {
-        proceedToCheckout.click();
+    @FindBy(css = "shopping-cart-icon fa-layers fa-fw")
+    private WebElement cartIcon;
+
+    public void clickCartIconButton() {
+        cartIcon.click();
     }
 
-    public void selectOption(WebElement element, String option) {
-        Select optionSelect = new Select(element);
-        optionSelect.selectByVisibleText(option);
+    @FindBy(css = "card-img")
+    private WebElement getShoppingCartBacon;
+
+    public void clickShoppingCart() {
+        getShoppingCartBacon.click();
     }
 
-    public void clickGuest() {
-        selectGuest.click();
+    @FindBy(css = "container")
+    private WebElement getContainerLogo;
+
+    public void clickContainerLogo() {
+        getContainerLogo.click();
     }
 
-    public void setFirstname() {
-        firstname.sendKeys("Test");
-    }
+    @FindBy(css = "btn-link")
+    private WebElement clickButtonMinus;
 
-    public void setLastname() {
-        lastname.sendKeys("User");
+    public void clickButtonMinus() {
+        clickButtonMinus.click();
     }
 
 
-    public void setBillingCompany() {
+    @FindBy (xpath = "//td[@class='amount'])[1]")
+    private WebElement itemPrice;
+
+    @FindBy (xpath = "//td[@class='amount'])[2]")
+    private WebElement taxPrice;
+
+    @FindBy (xpath = "//td[@class='amount'])[3]")
+    private WebElement totalPrice;
+
+    public double productPrice() {
+        String amountValue = itemPrice.getText(); //$15.99
+        String cleanAmountValue = amountValue.replace("$", "");
+        return Double.parseDouble(cleanAmountValue);
     }
 
-    public void setBillingEmail() {
-        billingEmail.sendKeys("a@a.com");
+    public double taxPrice() {
+        String taxValue = taxPrice.getText(); //$15.99
+        String cleanTaxValue = taxValue.replace("$", "");
+        return Double.parseDouble(cleanTaxValue);
     }
 
-    public void setBillingAddress() {
-        billingAddress.sendKeys("adresa de test");
+    public double totalPrice() {
+        String totalValue = totalPrice.getText(); //$15.99
+        String cleanTotalValue = totalValue.replace("$", "");
+        return Double.parseDouble(cleanTotalValue);
+    }
+    @FindBy(css = ".svg-inline--fa fa-plus-circle.fa-w-16")
+    private WebElement plusQuantity;
+
+    public void clickPlusQuantity() {
+        plusQuantity.click();
     }
 
-    public void setBillingCity() {
-        billingCity.sendKeys("alabama test");
+
+    @FindBy(id = "item_1_title_link")
+    private WebElement graniteChipsProduct;
+
+    public WebElement getGraniteChipsProduct() {
+        return graniteChipsProduct;
     }
 
-    public void setBillingPostCode() {
-        billingPostcode.sendKeys("12345");
+    @FindBy(css = ".btn.btn-success")
+    private WebElement checkOutButton;
+
+    public WebElement getCheckOutButton() {
+        return checkOutButton;
     }
 
-    public void setBillingTelephone() {
-        billingTelephone.sendKeys("0123456789");
-    }
+    @FindBy(css = "svg-inline--fa.fa-shopping-bag.fa-w-14.fa-3x.brand-logo")
+    private WebElement buttonProduct;
 
-    public void clickShippingButton() {
-        shippingButton.click();
-    }
+    public WebElement getButtonProduct() {
+        return getButtonProduct();
 
-    public void clickBillingButton() {
-        billingButton.click();
-    }
 
-    public void clickPaymentButton() {
-        paymentButton.click();
-    }
-
-    public void clickCheckoutButton() {
-        checkoutButton.click();
-    }
-
-    public void addItemToCart() {
-        getFoodMenu();
-        clickAddToCart();
-    }
-
-    public void cartInfo() {
-        setCityCart();
-        setPostcode();
-        selectOption(cartRegion, "Alabama");
-        clickProceedToCheckout();
-    }
-
-    public void checkoutMandatoryFields() {
-        setFirstname();
-        setLastname();
-        setBillingCompany();
-        setBillingEmail();
-        setBillingAddress();
-        setBillingCity();
-        selectOption(billingRegion, "Alabama");
-        setBillingPostCode();
-        setBillingTelephone();
-    }
-
-    public void checkoutContinueButtons() {
-        clickBillingButton();
-        clickWhenReady(shippingButton);
-        clickWhenReady(paymentButton);
-        clickWhenReady(checkoutButton);
-    }
-
-    public void selectQty() {
-        cartRegion.clear();
-        cartRegion.sendKeys("2");
-    }
-
-    public void clickWhenReady(WebElement locator) {
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
-        element.click();
-    }
-
-    public void assertTextWhenReady(WebElement locator, String expectedText) {
-        wait.until(ExpectedConditions.visibilityOf(locator));
-        try {
-            wait.until(ExpectedConditions.textToBePresentInElement(locator, expectedText));
-        } catch (Exception e) {
-            System.out.println("Element or text not visible or incorrect");
         }
-        assertEquals(expectedText, locator.getText());
     }
-
-    public void fillMandatoryFieldsExcept(WebElement fieldToSkip) {
-        addItemToCart();
-        cartInfo();
-        clickGuest();
-        checkoutMandatoryFields();
-        fieldToSkip.clear();
-        billingButton.click();
-    }
-
-
-}
