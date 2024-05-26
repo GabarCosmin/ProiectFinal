@@ -134,7 +134,4 @@ public class CheckoutPage extends BasePage {
 
 
         }
-
-    public Object getSortButton() {
     }
-}

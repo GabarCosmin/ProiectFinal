@@ -32,7 +32,7 @@ public class CheckoutTest extends Hooks {
     public void SortAndDeleteItems() throws InterruptedException {
         checkoutPage.clickSortButton();
         Thread.sleep(3000);
-        checkoutPage.clickCartIconButton(checkoutPage.getSortButton(), "Sort by price (low and high)");
+        checkoutPage.selectOption(checkoutPage.getSortButton(), "Sort by price (low and high)");
         Thread.sleep(3000);
         checkoutPage.clickCartIconButton();
         wait.until(ExpectedConditions.elementToBeClickable(checkoutPage.getShoppingCartBacon()));
