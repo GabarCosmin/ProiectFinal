@@ -14,17 +14,15 @@ public class Hooks {
     public void setUp() {
 
 
-        WebDriverManager.chromedriver().setup();
+//        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("https://fasttrackit-test.netlify.app/#/");
     }
 }
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
-
-}
-
-
+//    @AfterMethod
+//    public void tearDown() {
+//        driver.quit();
+//
+//
+//
